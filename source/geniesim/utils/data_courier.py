@@ -14,7 +14,7 @@ class DataCourier:
         self.api_core = api_core
         self.enable_ros = enable_ros
         if enable_ros:
-            if node_name in ["pi", ""]:
+            if node_name in ["pi", "abs_pose", ""]:
                 self.sim_ros_node = PIROSNode(robot_name="G1_omnipicker")
                 # Spin in main loop for unified processing
                 self.api_core.benchmark_ros_node = self.sim_ros_node

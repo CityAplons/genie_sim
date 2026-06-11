@@ -334,12 +334,9 @@ class EvaluationSummary:
 
     def to_dynamic_msg_pub(self, results=None):
         results = self.results if results is None else results
-        task_steps = TASK_STEPS.get(re.sub(r"_\d+$", "", self.task_name), [])
-        temp_scores = get_statistics(results, task_steps)["scores"]
+        temp_scores = get_statistics(results, self.sub_steps)["scores"]
         if self.current_eval.task_instruction not in temp_scores.keys():
-            temp_statistic = {"cnt": 1}
-            for step in task_steps:
-                temp_statistic[step] = 0.0
+            temp_statistic = [0.0] * len(self.sub_steps)
         else:
             temp_statistic = temp_scores[self.current_eval.task_instruction]
 
